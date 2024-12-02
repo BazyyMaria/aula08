@@ -1,37 +1,49 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default async function Registrar() {
 
-event.preventDefault();
-try {
-  await fetch('http://localhost:3000/usuarios', {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
 
- method: 'POST',
- headers: {'Content-Type': 'application/json'},
- body: JSON.stringify({
+const navigation = useNavigation();
+
+const registrarPessoa = async(event) => {
+   event.preventDefault();
+try {
+  const resposta = await fetch('http://localhost:3000/usuarios'), {
+     method: 'POST',
+     headers: {'Content-Type': 'Application/json'},
+     body: JSON.stringify({
         nome:nome,
         email:email
     }) 
+
   });
+  if(resposta.ok){
+    navigation('/');
+  }
 } catch {
     alert("Ocorreu um erro na aplicação! :(" );
+}
+
 }
 
   return (
 
     <main>
-    <form onSubmit={handleRegistro}>
+    <form onSubmit="">
       <input
         type="text"
-        placeholder="Digite seu nome"
+        name="id"
         value={nome}
-        onChange={(e) => setNome(e.target.value)}
+        onChange={(event) => setNome(event.target.value)}
       />
       <input
         type="email"
-        placeholder="Digite seu e-mail"
+        name="id"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(event) => setEmail(event.target.value)}
       />
       <button type="submit">Registrar</button>
     </form>
