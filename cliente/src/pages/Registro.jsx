@@ -11,15 +11,14 @@ const navigation = useNavigation();
 const registrarPessoa = async(event) => {
    event.preventDefault();
 try {
-  const resposta = await fetch('http://localhost:3000/usuarios'), {
+  const resposta = await fetch('http://localhost:3000/usuarios', {
      method: 'POST',
      headers: {'Content-Type': 'Application/json'},
      body: JSON.stringify({
         nome:nome,
         email:email
     }) 
-
-  });
+  })
   if(resposta.ok){
     navigation('/');
   }
