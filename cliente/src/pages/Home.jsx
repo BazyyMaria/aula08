@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {jsPDF} from "jspdf";
 import "jspdf-autotable";
+import {Link} from "react-router-dom"
 import {Button} from '@mui/material';
 
 export default function Home() {
@@ -33,8 +34,9 @@ const removerPessoa = async (id) => {
 }
 
 const exportarPDF = () => {
+
 const doc =  new jsPDF();
-const tabela =  usuarios.map(usuario => [
+const tabela =  usuarios.map((usuario) => [
   usuario.id,
   usuario.nome,
   usuario.email
@@ -53,7 +55,7 @@ doc.save("alunos.pdf");
     <div>
     <table>
       <thead>
-        <Button variante="contained" onClick={() => exportarPDF()}>
+        <Button variant="contained" onClick={() => exportarPDF()}>
           Gerar PDF
         </Button>
       <tr>
@@ -69,6 +71,9 @@ doc.save("alunos.pdf");
           <td>{usuario.email}</td>
           <td>
             <button onClick={() => removerPessoa(usuario.id)}>X</button>
+            <Link to={'/alterar/' + usuario.id}>
+               <button>Alterar</button>
+            </Link>
           </td>
         </tr>
       ))}

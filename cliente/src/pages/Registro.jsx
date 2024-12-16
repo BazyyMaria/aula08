@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default async function Registrar() {
+export default function Registrar() {
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
 
-const navigation = useNavigation();
+const navigation = useNavigate();
 
 const registrarPessoa = async(event) => {
    event.preventDefault();
@@ -31,7 +31,7 @@ try {
   return (
 
     <main>
-    <form onSubmit="">
+    <form onSubmit={registrarPessoa}>
       <input
         type="text"
         name="id"
